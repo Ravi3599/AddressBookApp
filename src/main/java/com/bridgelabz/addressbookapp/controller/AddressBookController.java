@@ -37,11 +37,13 @@ public class AddressBookController {
 		String message = service.putMessage(name);
 		return new ResponseEntity(message,HttpStatus.OK);
 	}
+	//Ability to get welcome message
 	@GetMapping("/welcome")
 	public ResponseEntity<String> getWelcome(){
 		String message = service.getWelcome();
 		return new ResponseEntity(message,HttpStatus.OK);
 	}
+	//Ability to store a address book record to repo
 	@PostMapping("/create")
 	public ResponseEntity<String> saveDataToRepo(@RequestBody AddressBookDTO addressBookDTO){
 		AddressBook newAddressBook = service.saveDataToRepo(addressBookDTO);
