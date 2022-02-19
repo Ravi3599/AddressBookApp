@@ -1,7 +1,18 @@
 package com.bridgelabz.addressbookapp.model;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+import com.bridgelabz.addressbookapp.dto.AddressBookDTO;
+
+@Entity
 public class AddressBook {
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Integer id;
+	
 	private String firstName;
 	private String lastName;
 	private String email;
@@ -25,6 +36,15 @@ public class AddressBook {
 		this.city = city;
 		this.state = state;
 		this.zip = zip;
+	}
+	public AddressBook(AddressBookDTO addressBookDTO) {
+		this.firstName = addressBookDTO.getFirstName();
+		this.lastName = addressBookDTO.getLastName();
+		this.email = addressBookDTO.getEmail();
+		this.phoneNumber = addressBookDTO.getPhoneNumber();
+		this.city = addressBookDTO.getCity();
+		this.state = addressBookDTO.getCity();
+		this.zip = addressBookDTO.getZip();
 	}
 	public Integer getId() {
 		return id;
