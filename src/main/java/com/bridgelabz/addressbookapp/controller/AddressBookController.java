@@ -62,7 +62,7 @@ public class AddressBookController {
 		return new ResponseEntity(dto,HttpStatus.ACCEPTED);
 	}
 	@GetMapping("/get/{id}")
-	public ResponseEntity<String> getRecordFromRepoByID(@PathVariable Integer id){
+	public ResponseEntity<ResponseDTO> getRecordFromRepoByID(@PathVariable Integer id){
 		Optional<AddressBook> newAddressBook = service.getRecordById(id);
 		ResponseDTO dto = new ResponseDTO("Address Book Record for particular id retrieved successfully",newAddressBook);
 		return new ResponseEntity(dto,HttpStatus.ACCEPTED);
