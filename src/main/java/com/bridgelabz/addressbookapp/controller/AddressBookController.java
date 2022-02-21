@@ -3,6 +3,8 @@ package com.bridgelabz.addressbookapp.controller;
 import java.util.List;
 import java.util.Optional;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -50,7 +52,7 @@ public class AddressBookController {
 	}
 	//Ability to store a address book record to repo
 	@PostMapping("/create")
-	public ResponseEntity<String> saveDataToRepo(@RequestBody AddressBookDTO addressBookDTO){
+	public ResponseEntity<String> saveDataToRepo(@Valid @RequestBody AddressBookDTO addressBookDTO){
 		AddressBook newAddressBook = service.saveDataToRepo(addressBookDTO);
 		ResponseDTO dto = new ResponseDTO("Address Book Record created successfully",newAddressBook);
 		return new ResponseEntity(dto,HttpStatus.CREATED);
@@ -80,7 +82,7 @@ public class AddressBookController {
 		return new ResponseEntity(dto,HttpStatus.ACCEPTED);
 	}
 	@PutMapping("/update/{id}")
-	public ResponseEntity<String> updateRecordById(@PathVariable Integer id,@RequestBody AddressBookDTO addressBookDTO){
+	public ResponseEntity<String> updateRecordById(@PathVariable Integer id,@Valid @RequestBody AddressBookDTO addressBookDTO){
 		AddressBook newAddressBook = service.updateRecordById(id,addressBookDTO);
 		ResponseDTO dto = new ResponseDTO("Address Book Record updated successfully",newAddressBook);
 		return new ResponseEntity(dto,HttpStatus.OK);

@@ -1,15 +1,33 @@
 package com.bridgelabz.addressbookapp.dto;
 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Pattern;
+
 import lombok.Data;
 
 @Data
 public class AddressBookDTO {
+	@NotEmpty(message="First name cant be empty")
+	@Pattern(regexp="^[A-Z]{1}[a-zA-Z\\s]{2,}$",message="Employee firstName is Invalid")
 	private String firstName;
+	
+	@NotEmpty(message="Last name cant be empty")
+	@Pattern(regexp="^[A-Z]{1}[a-zA-Z\\s]{2,}$",message="Employee firstName is Invalid")
 	private String lastName;
+	
+	@Email
 	private String email;
+	
+	@NotEmpty(message="Phone number cant be empty")
 	private long phoneNumber;
+	
+	@NotEmpty(message="city cant be empty")
 	private String city;
+	
+	@NotEmpty(message="State cant be empty")
 	private String state;
+	@NotEmpty(message="zip cant be empty")
 	private Integer zip;
 	
 	public AddressBookDTO() {
