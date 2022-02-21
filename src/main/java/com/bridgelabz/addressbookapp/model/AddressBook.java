@@ -46,6 +46,16 @@ public class AddressBook {
 		this.state = addressBookDTO.getCity();
 		this.zip = addressBookDTO.getZip();
 	}
+	public AddressBook(Integer id,AddressBookDTO addressBookDTO) {
+		this.id=id;
+		this.firstName = addressBookDTO.getFirstName();
+		this.lastName = addressBookDTO.getLastName();
+		this.email = addressBookDTO.getEmail();
+		this.phoneNumber = addressBookDTO.getPhoneNumber();
+		this.city = addressBookDTO.getCity();
+		this.state = addressBookDTO.getCity();
+		this.zip = addressBookDTO.getZip();
+	}
 	public Integer getId() {
 		return id;
 	}
