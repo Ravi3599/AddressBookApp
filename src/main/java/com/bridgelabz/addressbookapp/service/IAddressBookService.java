@@ -12,10 +12,8 @@ public interface IAddressBookService {
 	public String putMessage(String name);
 	public String getWelcome();
 	public AddressBook saveDataToRepo(AddressBookDTO addressBookDTO);
-	public Optional<AddressBook> getRecordById(Integer id);
+	public AddressBook getRecordById(Integer id);
 	public List<AddressBook> getRecord();
-	public List<AddressBook> getRecordByFirstName(String firstName);
-	public List<AddressBook> getRecordByName();
 	public AddressBook updateRecordById(Integer id, AddressBookDTO addressBookDTO);
 	public String deleteRecordById(Integer id);
 }

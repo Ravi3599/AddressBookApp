@@ -23,4 +23,9 @@ public class AddressBookExceptionHandler {
 				ResponseDTO responseDTO = new ResponseDTO("Exception while processing REST requests",errMesg);
 				return new ResponseEntity<ResponseDTO>(responseDTO,HttpStatus.BAD_REQUEST);
 		}
+		@ExceptionHandler(AddressBookException.class)
+		public ResponseEntity<ResponseDTO> handleEmployeeNotFound(AddressBookException exception) {
+			ResponseDTO response = new ResponseDTO("Invalid id input", exception.getMessage());
+			return new ResponseEntity<ResponseDTO>(response, HttpStatus.BAD_REQUEST);
+		}
 }
