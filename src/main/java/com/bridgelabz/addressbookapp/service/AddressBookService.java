@@ -55,6 +55,10 @@ public class AddressBookService implements IAddressBookService{
 		return addressBook;
 	}
 	public AddressBook updateRecordById(Integer id, AddressBookDTO addressBookDTO) {
+		Optional<AddressBook> addressBook = repo.findById(id);
+		if(addressBook.isEmpty()) {
+			throw new AddressBookException("Address Book Details for id not found");
+		}
 		AddressBook newBook = new AddressBook(id,addressBookDTO);
 		repo.save(newBook);
 		log.info("Address Book Data got updated for id: "+id);
