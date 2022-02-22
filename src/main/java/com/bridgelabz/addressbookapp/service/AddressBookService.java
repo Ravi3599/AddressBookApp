@@ -11,7 +11,10 @@ import com.bridgelabz.addressbookapp.exception.AddressBookException;
 import com.bridgelabz.addressbookapp.model.AddressBook;
 import com.bridgelabz.addressbookapp.repository.AddressBookRepository;
 
+import lombok.extern.slf4j.Slf4j;
+
 @Service
+@Slf4j
 public class AddressBookService implements IAddressBookService{
 	@Autowired
 	AddressBookRepository repo;
@@ -31,32 +34,58 @@ public class AddressBookService implements IAddressBookService{
 	public AddressBook saveDataToRepo(AddressBookDTO addressBookDTO) {
 		AddressBook newAddressBook = new AddressBook(addressBookDTO);
 		repo.save(newAddressBook);
+		log.info("Address Book Data got saved");
 		return newAddressBook;
 	}
 	public AddressBook getRecordById(Integer id) {
-		//AddressBook addressBook = repo.findByid
-		List<AddressBook> addressList = repo.findAll();
-		AddressBook newAddressBook = addressList.stream().filter(addressData->addressData.getId()==id)
-				.findFirst()
-				.orElseThrow(()->new AddressBookException("Particular address book details not found"));
-		return newAddressBook;
+//		List<AddressBook> addressList = repo.findAll();
+//		AddressBook newAddressBook = addressList.stream().filter(addressData->addressData.getId()==id)
+//				.findFirst()
+//				.orElseThrow(()->new AddressBookException("Particular address book details not found"));
+		Optional<AddressBook> newAddressBook = repo.findById(id);
+		if(newAddressBook.isEmpty()) {
+			log.warn("Unable to find address book details for given id: "+id);
+			throw new AddressBookException("Address Book Details for id not found");
+		}
+		return newAddressBook.get();
 	}
 	public List<AddressBook> getRecord(){
-		return repo.findAll();
+		List<AddressBook> addressBook = repo.findAll();
+		log.info("Found all records in Address Book");
+		return addressBook;
 	}
 	public AddressBook updateRecordById(Integer id, AddressBookDTO addressBookDTO) {
 		AddressBook newBook = new AddressBook(id,addressBookDTO);
 		repo.save(newBook);
+		log.info("Address Book Data got updated for id: "+id);
 		return newBook;
 	}
 	public String deleteRecordById(Integer id) {
-		//repo.deleteById(id);
-		List<AddressBook> addressList = repo.findAll();
-		AddressBook newAddressBook = addressList.stream().filter(addressData->addressData.getId()==id)
-				.findFirst()
-				.orElseThrow(()->new AddressBookException("Particular address book details not found"));
-		repo.delete(newAddressBook);
-		return null;
-		
+//		List<AddressBook> addressList = repo.findAll();
+//		AddressBook newAddressBook = addressList.stream().filter(addressData->addressData.getId()==id)
+//				.findFirst()
+//				.orElseThrow(()->new AddressBookException("Particular address book details not found"));
+//		repo.delete(newAddressBook);
+		Optional<AddressBook> newAddressBook = repo.findById(id);
+		if(newAddressBook.isEmpty()) {
+			log.warn("Unable to find address book details for given id: "+id);
+			throw new AddressBookException("Address Book Details not found");
+		}
+		else {
+			repo.deleteById(id);
+		}
+		return null;	
+	}
+	public List<AddressBook> getRecordByCity(String city) {
+//		List<AddressBook> addressList = repo.findAll();
+//		AddressBook newAddressBook = addressList.stream().filter(addressData->addressData.getCity()==city)
+//									.findFirst()
+//									.orElseThrow(()->new AddressBookException("Particular address book details not found"));
+		List<AddressBook> newAddressBook = repo.findByCity(city);
+		if(newAddressBook.isEmpty()) {
+			log.warn("Unable to find address book details for given city: "+city);
+			throw new AddressBookException("Address Book Record not Found");
+		}
+		return newAddressBook;
 	}
 }

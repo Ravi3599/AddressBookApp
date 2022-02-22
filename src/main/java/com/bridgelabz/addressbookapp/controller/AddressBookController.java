@@ -29,6 +29,7 @@ import com.bridgelabz.addressbookapp.service.IAddressBookService;
 public class AddressBookController {
 	@Autowired
 	IAddressBookService service;
+	
 	//Ability to get simple welcome message with name through request parameter
 	@GetMapping("/getMessage")
 	public ResponseEntity<String> getMessage(@RequestParam String name){
@@ -85,6 +86,13 @@ public class AddressBookController {
 	@DeleteMapping("/delete/{id}")
 	public ResponseEntity<String> deleteRecordById(@PathVariable Integer id){
 		ResponseDTO dto = new ResponseDTO("Address Book Record updated successfully",service.deleteRecordById(id));
+		return new ResponseEntity(dto,HttpStatus.OK);
+	}
+	//Ability to get record by city
+	@GetMapping("/getbycity/{city}")
+	public ResponseEntity<String> getRecordFromRepoByCity(@PathVariable String city) throws AddressBookException{
+		List<AddressBook> newAddressBook = service.getRecordByCity(city);
+		ResponseDTO dto = new ResponseDTO("Address Book Record for particular city retrieved successfully",newAddressBook);
 		return new ResponseEntity(dto,HttpStatus.OK);
 	}
 }

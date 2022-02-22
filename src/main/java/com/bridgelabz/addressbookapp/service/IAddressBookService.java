@@ -16,4 +16,5 @@ public interface IAddressBookService {
 	public List<AddressBook> getRecord();
 	public AddressBook updateRecordById(Integer id, AddressBookDTO addressBookDTO);
 	public String deleteRecordById(Integer id);
+	public List<AddressBook> getRecordByCity(String city);
 }
