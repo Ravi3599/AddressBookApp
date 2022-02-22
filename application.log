@@ -1,0 +1,46 @@
+2022-02-22 21:00:49.154  INFO 8892 --- [restartedMain] c.b.a.AddressbookappApplication          : Starting AddressbookappApplication using Java 11.0.13 on DESKTOP-E567N10 with PID 8892 (D:\workspace\addressbookapp\target\classes started by ravik in D:\workspace\addressbookapp)
+2022-02-22 21:00:49.155 DEBUG 8892 --- [restartedMain] c.b.a.AddressbookappApplication          : Running with Spring Boot v2.6.3, Spring v5.3.15
+2022-02-22 21:00:49.156  INFO 8892 --- [restartedMain] c.b.a.AddressbookappApplication          : The following profiles are active: prod
+2022-02-22 21:00:51.730  WARN 8892 --- [restartedMain] ConfigServletWebServerApplicationContext : Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'dataSourceScriptDatabaseInitializer' defined in class path resource [org/springframework/boot/autoconfigure/sql/init/DataSourceInitializationConfiguration.class]: Unsatisfied dependency expressed through method 'dataSourceScriptDatabaseInitializer' parameter 0; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'dataSource' defined in class path resource [org/springframework/boot/autoconfigure/jdbc/DataSourceConfiguration$Hikari.class]: Bean instantiation via factory method failed; nested exception is org.springframework.beans.BeanInstantiationException: Failed to instantiate [com.zaxxer.hikari.HikariDataSource]: Factory method 'dataSource' threw exception; nested exception is org.springframework.boot.autoconfigure.jdbc.DataSourceProperties$DataSourceBeanCreationException: Failed to determine a suitable driver class
+2022-02-22 21:00:51.894 ERROR 8892 --- [restartedMain] o.s.b.d.LoggingFailureAnalysisReporter   : 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Failed to configure a DataSource: 'url' attribute is not specified and no embedded datasource could be configured.
+
+Reason: Failed to determine a suitable driver class
+
+
+Action:
+
+Consider the following:
+	If you want an embedded database (H2, HSQL or Derby), please put it on the classpath.
+	If you have database settings to be loaded from a particular profile you may need to activate it (the profiles prod are currently active).
+
+2022-02-22 21:01:19.240  INFO 11376 --- [restartedMain] c.b.a.AddressbookappApplication          : Starting AddressbookappApplication using Java 11.0.13 on DESKTOP-E567N10 with PID 11376 (D:\workspace\addressbookapp\target\classes started by ravik in D:\workspace\addressbookapp)
+2022-02-22 21:01:19.242 DEBUG 11376 --- [restartedMain] c.b.a.AddressbookappApplication          : Running with Spring Boot v2.6.3, Spring v5.3.15
+2022-02-22 21:01:19.242  INFO 11376 --- [restartedMain] c.b.a.AddressbookappApplication          : The following profiles are active: prod
+2022-02-22 21:01:21.482  WARN 11376 --- [restartedMain] ConfigServletWebServerApplicationContext : Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'dataSourceScriptDatabaseInitializer' defined in class path resource [org/springframework/boot/autoconfigure/sql/init/DataSourceInitializationConfiguration.class]: Unsatisfied dependency expressed through method 'dataSourceScriptDatabaseInitializer' parameter 0; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'dataSource' defined in class path resource [org/springframework/boot/autoconfigure/jdbc/DataSourceConfiguration$Hikari.class]: Bean instantiation via factory method failed; nested exception is org.springframework.beans.BeanInstantiationException: Failed to instantiate [com.zaxxer.hikari.HikariDataSource]: Factory method 'dataSource' threw exception; nested exception is org.springframework.boot.autoconfigure.jdbc.DataSourceProperties$DataSourceBeanCreationException: Failed to determine a suitable driver class
+2022-02-22 21:01:21.542 ERROR 11376 --- [restartedMain] o.s.b.d.LoggingFailureAnalysisReporter   : 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Failed to configure a DataSource: 'url' attribute is not specified and no embedded datasource could be configured.
+
+Reason: Failed to determine a suitable driver class
+
+
+Action:
+
+Consider the following:
+	If you want an embedded database (H2, HSQL or Derby), please put it on the classpath.
+	If you have database settings to be loaded from a particular profile you may need to activate it (the profiles prod are currently active).
+
