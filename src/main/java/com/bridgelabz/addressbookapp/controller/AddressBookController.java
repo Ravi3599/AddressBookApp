@@ -24,30 +24,15 @@ import com.bridgelabz.addressbookapp.exception.AddressBookException;
 import com.bridgelabz.addressbookapp.model.AddressBook;
 import com.bridgelabz.addressbookapp.service.IAddressBookService;
 
+//Created controller class so we can perform api calls
 @RestController
 @RequestMapping("/addressbookservice")
 public class AddressBookController {
+	
+	//Autowired IAddressBookService interface so we can inject its dependency here
 	@Autowired
 	IAddressBookService service;
 	
-	//Ability to get simple welcome message with name through request parameter
-	@GetMapping("/getMessage")
-	public ResponseEntity<String> getMessage(@RequestParam String name){
-		String message = service.getMessage(name);
-		return new ResponseEntity(message,HttpStatus.OK);
-	}
-	//Ability to get simple "hello" message with firstName and lastName
-	@PostMapping("/postMessage")
-	public ResponseEntity<String> postMessage(@RequestBody AddressBook addressBook){
-		String message = service.postMessage(addressBook);
-		return new ResponseEntity(message,HttpStatus.OK);
-	}
-	//Ability to get simple "hi" message with name of person through pathvariable
-	@GetMapping("/putMessage/{name}")
-	public ResponseEntity<String> putMessage(@PathVariable String name){
-		String message = service.putMessage(name);
-		return new ResponseEntity(message,HttpStatus.OK);
-	}
 	//Ability to get welcome message
 	@GetMapping("/welcome")
 	public ResponseEntity<String> getWelcome(){

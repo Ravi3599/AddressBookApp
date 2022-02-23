@@ -6,10 +6,8 @@ import java.util.Optional;
 import com.bridgelabz.addressbookapp.dto.AddressBookDTO;
 import com.bridgelabz.addressbookapp.model.AddressBook;
 
+//Created interface for all service methods so we can achieve abstraction
 public interface IAddressBookService {
-	public String getMessage(String name);
-	public String postMessage(AddressBook addressBook);
-	public String putMessage(String name);
 	public String getWelcome();
 	public AddressBook saveDataToRepo(AddressBookDTO addressBookDTO);
 	public AddressBook getRecordById(Integer id);

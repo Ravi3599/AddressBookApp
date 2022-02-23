@@ -6,6 +6,7 @@ import javax.validation.constraints.Pattern;
 
 import lombok.Data;
 
+//Created AddressBookDTO and added validations so while accepting data it gets validated
 @Data
 public class AddressBookDTO {
 	@NotEmpty(message="First name cant be empty")
@@ -37,72 +38,4 @@ public class AddressBookDTO {
 	public AddressBookDTO() {
 		super();
 	}
-
-//	public AddressBookDTO(String firstName, String lastName, String email, long phoneNumber, String city, String state,
-//			Integer zip) {
-//		super();
-//		this.firstName = firstName;
-//		this.lastName = lastName;
-//		this.email = email;
-//		this.phoneNumber = phoneNumber;
-//		this.city = city;
-//		this.state = state;
-//		this.zip = zip;
-//	}
-//
-//	public String getFirstName() {
-//		return firstName;
-//	}
-//
-//	public void setFirstName(String firstName) {
-//		this.firstName = firstName;
-//	}
-//
-//	public String getLastName() {
-//		return lastName;
-//	}
-//
-//	public void setLastName(String lastName) {
-//		this.lastName = lastName;
-//	}
-//
-//	public String getEmail() {
-//		return email;
-//	}
-//
-//	public void setEmail(String email) {
-//		this.email = email;
-//	}
-//
-//	public long getPhoneNumber() {
-//		return phoneNumber;
-//	}
-//
-//	public void setPhoneNumber(long phoneNumber) {
-//		this.phoneNumber = phoneNumber;
-//	}
-//
-//	public String getCity() {
-//		return city;
-//	}
-//
-//	public void setCity(String city) {
-//		this.city = city;
-//	}
-//
-//	public String getState() {
-//		return state;
-//	}
-//
-//	public void setState(String state) {
-//		this.state = state;
-//	}
-//
-//	public Integer getZip() {
-//		return zip;
-//	}
-//
-//	public void setZip(Integer zip) {
-//		this.zip = zip;
-//	}
 }
