@@ -10,6 +10,8 @@ import com.bridgelabz.addressbookapp.dto.AddressBookDTO;
 import com.bridgelabz.addressbookapp.exception.AddressBookException;
 import com.bridgelabz.addressbookapp.model.AddressBook;
 import com.bridgelabz.addressbookapp.repository.AddressBookRepository;
+import com.bridgelabz.addressbookapp.util.EmailSenderService;
+import com.bridgelabz.addressbookapp.util.TokenUtil;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -18,18 +20,28 @@ import lombok.extern.slf4j.Slf4j;
 public class AddressBookService implements IAddressBookService{
 	//Autowired repository class so we can inject its dependecy here
 	@Autowired
-	AddressBookRepository repo;
+	private AddressBookRepository repo;
+	
+	@Autowired
+	TokenUtil tokenutil;
+	
+	@Autowired
+	private EmailSenderService sender;
+	
 	
 	//Created service method which serves controller api to return welcome message
 	public String getWelcome() {
 		return "Welcome to Address Book !";
 	}
 	//Created service method which serves controller api to post data 
-	public AddressBook saveDataToRepo(AddressBookDTO addressBookDTO) {
+	public String saveDataToRepo(AddressBookDTO addressBookDTO) {
 		AddressBook newAddressBook = new AddressBook(addressBookDTO);
 		repo.save(newAddressBook);
 		log.info("Address Book Data got saved");
-		return newAddressBook;
+		String token=tokenutil.createToken(newAddressBook.getId());
+		//emaillistner.sendMail();
+		sender.sendEmail("ravirenapurkar@gmail.com", "Test Email", "http://localhost:8080/addressbookservice/"+token);
+		return token;
 	}
 	//Created service method which serves controller api to get record by id 
 	public AddressBook getRecordById(Integer id) {
@@ -49,6 +61,19 @@ public class AddressBookService implements IAddressBookService{
 		List<AddressBook> addressBook = repo.findAll();
 		log.info("Found all records in Address Book");
 		return addressBook;
+	}
+	//Retrive all records of Address Book data by token
+	@Override
+	public List<AddressBook> getAddressBookData(String token) 
+	{
+		int id=tokenutil.decodeToken(token);
+		Optional<AddressBook> newAddressBook=repo.findById(id);
+		if(newAddressBook.isPresent()) {
+			List<AddressBook> listAddress=repo.findAll();
+		return listAddress;		
+		}else {
+		System.out.println("Exception ...Token not found!");	
+		return null;	}	
 	}
 	//Created service method which serves controller api to update record by id 
 	public AddressBook updateRecordById(Integer id, AddressBookDTO addressBookDTO) {

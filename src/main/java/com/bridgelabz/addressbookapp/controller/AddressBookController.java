@@ -31,7 +31,7 @@ public class AddressBookController {
 	
 	//Autowired IAddressBookService interface so we can inject its dependency here
 	@Autowired
-	IAddressBookService service;
+	private IAddressBookService service;
 	
 	//Ability to get welcome message
 	@GetMapping("/welcome")
@@ -42,8 +42,8 @@ public class AddressBookController {
 	//Ability to store a address book record to repo
 	@PostMapping("/create")
 	public ResponseEntity<String> saveDataToRepo(@Valid @RequestBody AddressBookDTO addressBookDTO){
-		AddressBook newAddressBook = service.saveDataToRepo(addressBookDTO);
-		ResponseDTO dto = new ResponseDTO("Address Book Record created successfully",newAddressBook);
+		String entity = service.saveDataToRepo(addressBookDTO);
+		ResponseDTO dto = new ResponseDTO("Address Book Record created successfully",entity);
 		return new ResponseEntity(dto,HttpStatus.CREATED);
 	}
 	//Ability to retrieve all data from repo
@@ -52,6 +52,14 @@ public class AddressBookController {
 		List<AddressBook> newAddressBook = service.getRecord();
 		ResponseDTO dto = new ResponseDTO("Address Book Record for particular id retrieved successfully",newAddressBook);
 		return new ResponseEntity(dto,HttpStatus.ACCEPTED);
+	}
+	//Ability to retrive all data by token
+	@GetMapping(value = "/retrive/{token}")
+	public ResponseEntity<ResponseDTO> getAddressBookData(@PathVariable String token)
+	{
+		List<AddressBook> entity = service.getAddressBookData(token);
+		ResponseDTO dto = new ResponseDTO("Data retrived successfully (:",entity);
+		return new ResponseEntity(dto,HttpStatus.OK);
 	}
 	//Ability to get record by id
 	@GetMapping("/get/{id}")
