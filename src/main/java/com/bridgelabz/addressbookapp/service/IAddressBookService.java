@@ -11,9 +11,12 @@ public interface IAddressBookService {
 	public String getWelcome();
 	public String saveDataToRepo(AddressBookDTO addressBookDTO);
 	public AddressBook getRecordById(Integer id);
+	public AddressBook getRecordByToken(String token);
 	public List<AddressBook> getRecord();
 	public List<AddressBook> getAddressBookData(String token);
 	public AddressBook updateRecordById(Integer id, AddressBookDTO addressBookDTO);
-	public String deleteRecordById(Integer id);
+	public AddressBook updateRecordByToken(String token, AddressBookDTO addressBookDTO);
+	public AddressBook deleteRecordById(Integer id);
+	public AddressBook deleteRecordByToken(String token);
 	public List<AddressBook> getRecordByCity(String city);
 }

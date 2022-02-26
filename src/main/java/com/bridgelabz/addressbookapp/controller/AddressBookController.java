@@ -47,7 +47,7 @@ public class AddressBookController {
 		return new ResponseEntity(dto,HttpStatus.CREATED);
 	}
 	//Ability to retrieve all data from repo
-	@GetMapping("/get")
+	@GetMapping("/retrive")
 	public ResponseEntity<String> getDataFromRepo(){
 		List<AddressBook> newAddressBook = service.getRecord();
 		ResponseDTO dto = new ResponseDTO("Address Book Record for particular id retrieved successfully",newAddressBook);
@@ -68,17 +68,37 @@ public class AddressBookController {
 		ResponseDTO dto = new ResponseDTO("Address Book Record for particular id retrieved successfully",newAddressBook);
 		return new ResponseEntity(dto,HttpStatus.OK);
 	}
+	//Ability to get a record by token
+	@GetMapping("/get/{token}")
+	public ResponseEntity<String> getRecordFromRepoByToken(@PathVariable String token) throws AddressBookException{
+		AddressBook newAddressBook = service.getRecordByToken(token);
+		ResponseDTO dto = new ResponseDTO("Address Book Record for particular id retrieved successfully",newAddressBook);
+		return new ResponseEntity(dto,HttpStatus.OK);
+	}
 	//Ability to update record for particular id
 	@PutMapping("/update/{id}")
 	public ResponseEntity<String> updateRecordById(@PathVariable Integer id,@Valid @RequestBody AddressBookDTO addressBookDTO){
 		AddressBook newAddressBook = service.updateRecordById(id,addressBookDTO);
 		ResponseDTO dto = new ResponseDTO("Address Book Record updated successfully",newAddressBook);
-		return new ResponseEntity(dto,HttpStatus.OK);
+		return new ResponseEntity(dto,HttpStatus.ACCEPTED);
+	}
+	//Ability to update record for particular token
+	@PutMapping("/update/{token}")
+	public ResponseEntity<String> updateRecordByToken(@PathVariable String token,@Valid @RequestBody AddressBookDTO addressBookDTO){
+		AddressBook newAddressBook = service.updateRecordByToken(token,addressBookDTO);
+		ResponseDTO dto = new ResponseDTO("Address Book Record updated successfully",newAddressBook);
+		return new ResponseEntity(dto,HttpStatus.ACCEPTED);
 	}
 	//Ability to delete record for particular id
 	@DeleteMapping("/delete/{id}")
 	public ResponseEntity<String> deleteRecordById(@PathVariable Integer id){
 		ResponseDTO dto = new ResponseDTO("Address Book Record updated successfully",service.deleteRecordById(id));
+		return new ResponseEntity(dto,HttpStatus.OK);
+	}
+	//Ability to delete record for particular token
+	@DeleteMapping("/delete/{token}")
+	public ResponseEntity<String> deleteRecordByToken(@PathVariable String token){
+		ResponseDTO dto = new ResponseDTO("Address Book Record updated successfully",service.deleteRecordByToken(token));
 		return new ResponseEntity(dto,HttpStatus.OK);
 	}
 	//Ability to get record by city
